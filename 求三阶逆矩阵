@@ -1,0 +1,89 @@
+#include <iostream.h>
+#define M 3
+#define N (2*M)
+
+int main()
+{
+	int i,j,k;
+	double a[M][M]={1,2,3,2,2,1,3,4,3};
+	double result[M][M];
+	double b[M][N];
+	cout<<"请输入矩阵的值（默认大小为3*3的矩阵）："<<endl;
+	for(i=0;i<M;i++)
+	{
+		for(j=0;j<M;j++)
+		{
+			cin>>a[i][j];
+			b[i][j]=a[i][j];
+		}
+	}
+	for(i=0;i<M;i++)
+	{
+		for(j=M;j<N;j++)
+		{
+			if(i==(j-M))
+			{
+				b[i][j]=1;
+			}
+			else
+			{
+				b[i][j]=0;
+			}
+		}
+	} 
+	for(i=0;i<M;i++)
+	{
+		if(b[i][i]==0)
+		{
+			for(k=i;k<M;k++)
+			{
+				if(b[k][k]!=0)
+				{
+					for(int j=0;j<N;j++)
+					{
+						double temp;
+						temp=b[i][j];
+						b[i][j]=b[k][j];
+						b[k][j]=temp;
+					}
+					break;
+				}
+			}
+			if(k==M)
+			{
+				cout<<"该矩阵不可逆！"<<endl;
+			}
+		}
+		for(j=N-1;j>=i;j--)
+		{
+			b[i][j]/=b[i][i];
+		}
+		for(k=0;k<M;k++)
+		{
+			if(k!=i)
+			{
+				double temp=b[k][i];
+				for(j=0;j<N;j++)
+				{
+					b[k][j]-=temp*b[i][j];
+				}
+			}
+		}
+	} 
+	for(i=0;i<M;i++)
+	{
+		for(j=3;j<N;j++)
+		{
+			result[i][j-3]=b[i][j];
+		}
+	}
+	for(i=0;i<M;i++)
+	{
+		for(j=0;j<M;j++)
+		{
+			cout<<result[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+	return 0;
+}
