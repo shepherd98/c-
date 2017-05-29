@@ -1,0 +1,56 @@
+#include<iostream.h>
+#include<stdlib.h>
+#include<time.h>
+#define N 50
+
+int fenxi(int b[][N],int n)
+{
+	int (*p)[N],i,j,max,min,ave,sum,max1,max2,min1,min2;
+	p=b;
+	max=0;
+	min=100000;
+	sum=0;
+	ave=0;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			sum+=b[i][j];
+			if(max<b[i][j])
+			{
+				max=b[i][j];
+				max1=i+1;
+				max2=j+1;
+			}
+		}
+	}
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			if(min>b[i][j])
+			{
+				min=b[i][j];
+				min1=i+1;
+				min2=j+1;
+			}
+		}
+	}
+	ave=(sum/(n*n));
+	cout<<"最大值为"<<max<<"    位置为第"<<max1<<"行第"<<max2<<"列\n";
+	cout<<"最小值为"<<min<<"    位置为第"<<min1<<"行第"<<min2<<"列\n";
+	cout<<"平均值为"<<ave<<"\n\n";
+	return 1;
+}
+
+int zhuanzhi(int c[][N],int n)
+{
+	int z[N][N],i,j;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			z[i][j]=c[j][i];
+		}
+	}
+	for(i=0;i<n;i++)
