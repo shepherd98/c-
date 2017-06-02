@@ -1,0 +1,64 @@
+#include<iostream.h>
+#include<string.h>
+
+char zhengshujiafa(char add1[40],char add2[40])
+{
+	char sum[50]={'0'};
+	int jw=0,len,len1,len2,i,j,k1,k2;
+	cout<<"被加数:";
+	cin>>add1;
+	cout<<"加数:";
+	cin>>add2;
+	len1=strlen(add1);
+	len2=strlen(add2);
+	len=len1>len2?len1:len2;
+	k1=len-len1;
+	k2=len-len2;
+	for(i=len-1;i>=0;i--)
+	{
+		if(i>=k1&&i>=k2)
+			j=(add1[i-k1]-48)+(add2[i-k2]-48)+jw;
+		else if(i>=k1)
+			j=add1[i-k1]-48+jw;
+		else
+			j=add2[i-k2]-48+jw;
+		if(j>9)
+		{
+			jw=1;sum[i+1]=j+38;
+		}
+		else
+		{
+			jw=0;sum[i+1]=j+48;
+		}
+	}
+	sum[0]=jw+48;
+	sum[len+1]='\0';
+	cout<<"相加结果:"<<sum<<'\n';
+	return 1;
+}
+
+
+char zsjfd(int c)
+{
+	float k;
+    cout<<"请输入减数(浮点数)";
+	cin>>k;
+	int b,d;
+	b=(int)k;
+	d=c-b;
+	cout<<"结果为"<<d<<endl;
+	return 1;
+}
+
+void main()
+{
+	cout<<"请输入两个要相加的整数";
+	char add1[40],add2[40];
+	int c;
+	zhengshujiafa(add1,add2);
+	cout<<"现在进行浮点数与整数的减法运算，请输入被减数(整数)";
+	cin>>c;
+	zsjfd(c);
+}
+
+
