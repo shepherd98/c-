@@ -1,9 +1,8 @@
 #include<iostream.h>
 
 struct node
-{
+{	node* link1;
 	char data;
-	node* link1;
 	node* link2;
 };                //之前失误很大的原因是这里没加分号
 
@@ -14,14 +13,14 @@ node*create()    //创建链表的函数，同时会发现在创建node时使用
 	head=NULL;
 	foot=new node;
 	p2=new node;
-	p2->link2 =head;
+	p2->link2 =head;         //在最后的的逆序输出段到这将为NULL，于是for循环结束
 	while(cin>>info,info!='@')
 	{ 
 		p2->data =info;
 		p1=new node;
-		p2->link1 =p1;
-		p1->link2 =p2;
-		p2=p1;
+		p2->link1 =p1;        //逆向连接，以实现逆序输出
+		p1->link2 =p2;       //正向连接
+		p2=p1;           //将下一个循环的第一步变为p1地址，实现在下一个循环给p1内容
 	}
 	p1->data =' ';
 	p2->link1 =foot;
@@ -36,7 +35,7 @@ void main()
 	int length=0;
 	node*k;
 	cout<<"请输入任意长度的字符串,并最后输入@作为终止:";    //接下来进行字符串的输入（创建并使用链表）
-    k=create();
+    k=create();          //k现在就是链表逆序的开头
 	cout<<"输出逆序字符串:";
 	for(length=0;k!=NULL;length++)
 	{
